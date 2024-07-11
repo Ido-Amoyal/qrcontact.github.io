@@ -1,1 +1,44 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact QR Code Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Contact QR Code Generator</h1>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Name" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <label for="bgColor">Background Color:</label>
+                <input type="color" id="bgColor" value="#000000">
+                <label for="textColor">Text Color:</label>
+                <input type="color" id="textColor" value="#ffffff">
+                <label for="logo">Upload Logo (optional):</label>
+                <input type="file" id="logo" accept="image/*">
+                <label for="logoSizeX">Logo Size (X-axis):</label>
+                <input type="range" id="logoSizeX" min="10" max="50" value="20">
+                <label for="logoSizeY">Logo Size (Y-axis):</label>
+                <input type="range" id="logoSizeY" min="10" max="50" value="20">
+            </form>
+            <a id="downloadLink" style="display:none;">Download Business Card</a>
+
+        </div>
+        
+        <div class="business-card" id="businessCard">
+            <h2 id="displayName"></h2>
+            <p id="displayEmail"></p>
+            <p id="displayPhone"></p>
+            <canvas id="qrcode"></canvas>
+            
+        </div>
+    </div>
+    <canvas id="combinedCanvas"></canvas>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    width: 59%;
+    max-height: 100vh;
+    overflow: auto;
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 5fr 3fr 0fr 0fr;
+}
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: center;
+    justify-items: center;
+    width: 100%;
+    max-width: 350px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    
+}
+.card input, .card button, .card input[type=color], .card input[type=file], .card input[type=range] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.business-card {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #000000;
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    box-sizing: border-box;
+}
+.business-card h2, .business-card p {
+    margin: 0 0 10px;
+    color: #ffffff;
+}
+#qrcode {
+    margin-top: 10px;
+}
+#downloadLink {
+    display: block;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+#downloadLink:hover {
+    background-color: #0056b3;
+}
+#combinedCanvas {
+    display: none;
+}
