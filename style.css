@@ -44,7 +44,9 @@ body {
 
 .business-card {
     padding: 20px;
-    border: 1px solid #ccc;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+    border: 1.5px solid #ffffff;
     border-radius: 10px;
     text-align: center;
     background-color: #000000;
@@ -62,6 +64,7 @@ body {
 
 #qrcode {
     margin-top: 10px;
+    margin-bottom: 40px;
 }
 
 #downloadLink {

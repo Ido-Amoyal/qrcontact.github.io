@@ -13,6 +13,10 @@
             <h1>Contact QR Code Generator</h1>
             <form id="contactForm">
                 <input type="text" id="name" placeholder="Name" required>
+                <input type="text" id="org" placeholder="Org" required>
+                <input type="text" id="role" placeholder="Role" required>
+                <input type="text" id="linkedIn_link" placeholder="linkedIn_link" required>
+
                 <input type="email" id="email" placeholder="Email" required>
                 <input type="tel" id="phone" placeholder="Phone Number" required>
                 <label for="bgColor">Background Color:</label>
@@ -26,16 +30,24 @@
                 <label for="logoSizeY">Logo Size (Y-axis):</label>
                 <input type="range" id="logoSizeY" min="10" max="50" value="20">
             </form>
-            <button id="generateButton" ><a id="walletLink" style="display:none;">Download Wallet Pass</a>
-            </button>
             <a id="downloadLink" style="display:none;">Download Business Card</a>
+
         </div>
         
         <div class="business-card" id="businessCard">
-            <h2 id="displayName"></h2>
-            <p id="displayEmail"></p>
-            <p id="displayPhone"></p>
+
+            <h2 id="displayOrg" style="text-transform: uppercase;"></h2>
+            <br/>
+            <br/>
+            <br/>
+
             <canvas id="qrcode"></canvas>
+            <br/>
+            <br/>
+            <br/>
+
+            <h2 id="displayName" style="text-transform: uppercase;"></h2>
+            <h2 id="displayRole" style="text-transform: uppercase; padding-bottom: rem;"></h2>
         </div>
     </div>
     <canvas id="combinedCanvas"></canvas>
