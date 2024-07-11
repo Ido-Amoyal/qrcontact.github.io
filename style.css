@@ -7,6 +7,7 @@ body {
     margin: 0;
     background-color: #f0f0f0;
     overflow: hidden;
+    
 }
 
 .container {
@@ -80,6 +81,28 @@ body {
 
 #combinedCanvas {
     display: none;
+}
+
+#generateButton{
+    display: block;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#generateButton:hover {
+    background-color: #0056b3;
+}
+
+#walletLink{
+    text-decoration: none;
+    font-size: 16px;
+    color: #ffffff;
+
 }
 
 @media (max-width: 768px) {
