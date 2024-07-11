@@ -1,145 +1,133 @@
 function drawRoundedRect(ctx, x, y, width, height, radius) {
-   ctx.beginPath();
-   ctx.moveTo(x + radius, y);
-   ctx.lineTo(x + width - radius, y);
-   ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-   ctx.lineTo(x + width, y + height - radius);
-   ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-   ctx.lineTo(x + radius, y + height);
-   ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-   ctx.lineTo(x, y + radius);
-   ctx.quadraticCurveTo(x, y, x + radius, y);
-   ctx.closePath();
-}
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
 
-function updateCard() {
-   const name = document.getElementById('name').value;
-   const email = document.getElementById('email').value;
-   const phone = document.getElementById('phone').value;
-   const bgColor = document.getElementById('bgColor').value;
-   const textColor = document.getElementById('textColor').value;
-   const logoSizePercentageX = document.getElementById('logoSizeX').value;
-   const logoSizePercentageY = document.getElementById('logoSizeY').value;
+        function updateCard() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const bgColor = document.getElementById('bgColor').value;
+            const textColor = document.getElementById('textColor').value;
+            const logoSizePercentageX = document.getElementById('logoSizeX').value;
+            const logoSizePercentageY = document.getElementById('logoSizeY').value;
 
-   // Update displayed card
-   document.getElementById('businessCard').style.backgroundColor = bgColor;
-   document.getElementById('displayName').innerText = name;
-   document.getElementById('displayName').style.color = textColor;
-   document.getElementById('displayEmail').innerText = email;
-   document.getElementById('displayEmail').style.color = textColor;
-   document.getElementById('displayPhone').innerText = phone;
-   document.getElementById('displayPhone').style.color = textColor;
+            // Update displayed card
+            document.getElementById('businessCard').style.backgroundColor = bgColor;
+            document.getElementById('displayName').innerText = name;
+            document.getElementById('displayName').style.color = textColor;
+            document.getElementById('displayEmail').innerText = email;
+            document.getElementById('displayEmail').style.color = textColor;
+            document.getElementById('displayPhone').innerText = phone;
+            document.getElementById('displayPhone').style.color = textColor;
 
-   // Create a URL with contact details for the landing page
-   const contactUrl = `contact.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+            // Update QR code
+            const vCardData = `BEGIN:VCARD
+VERSION:3.0
+FN:${name}
+EMAIL:${email}
+TEL:${phone}
+END:VCARD`;
 
-   // Update QR code
-   QRCode.toCanvas(document.getElementById('qrcode'), contactUrl, { errorCorrectionLevel: 'H' }, function (error, qrCanvas) {
-       if (error) console.error(error);
+            const logoFile = document.getElementById('logo').files[0];
+            if (logoFile) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    QRCode.toCanvas(document.getElementById('qrcode'), vCardData, { errorCorrectionLevel: 'H' }, function (error, qrCanvas) {
+                        if (error) console.error(error);
 
-       const logoFile = document.getElementById('logo').files[0];
-       if (logoFile) {
-           const reader = new FileReader();
-           reader.onload = function (e) {
-               const qrContext = qrCanvas.getContext('2d');
-               const logo = new Image();
-               logo.onload = function () {
-                   const logoSizeX = qrCanvas.width * (logoSizePercentageX / 100);
-                   const logoSizeY = qrCanvas.height * (logoSizePercentageY / 100);
-                   const logoMargin = 13;
-                   const logoX = (qrCanvas.width - logoSizeX) / 2;
-                   const logoY = (qrCanvas.height - logoSizeY) / 2;
-                   qrContext.fillStyle = "#ffffff"; // Set background color behind the logo to white
-                   qrContext.fillRect(logoX - logoMargin, logoY - logoMargin, logoSizeX + logoMargin * 2, logoSizeY + logoMargin * 2);
-                   qrContext.drawImage(logo, logoX, logoY, logoSizeX, logoSizeY);
+                        const qrContext = qrCanvas.getContext('2d');
+                        const logo = new Image();
+                        logo.onload = function () {
+                            const logoSizeX = qrCanvas.width * (logoSizePercentageX / 100);
+                            const logoSizeY = qrCanvas.height * (logoSizePercentageY / 100);
+                            const logoMargin = 13;
+                            const logoX = (qrCanvas.width - logoSizeX) / 2;
+                            const logoY = (qrCanvas.height - logoSizeY) / 2;
+                            qrContext.fillStyle = "#ffffff"; // Set background color behind the logo to white
+                            qrContext.fillRect(logoX - logoMargin, logoY - logoMargin, logoSizeX + logoMargin * 2, logoSizeY + logoMargin * 2);
+                            qrContext.drawImage(logo, logoX, logoY, logoSizeX, logoSizeY);
 
-                   // Update combined canvas
-                   updateCombinedCanvas(name, email, phone, bgColor, textColor, qrCanvas);
-               };
-               logo.src = e.target.result;
-           };
-           reader.readAsDataURL(logoFile);
-       } else {
-           // Update combined canvas
-           updateCombinedCanvas(name, email, phone, bgColor, textColor, qrCanvas);
-       }
-   });
-}
+                            // Update combined canvas
+                            updateCombinedCanvas(name, email, phone, bgColor, textColor, qrCanvas);
+                        };
+                        logo.src = e.target.result;
+                    });
+                };
+                reader.readAsDataURL(logoFile);
+            } else {
+                QRCode.toCanvas(document.getElementById('qrcode'), vCardData, function (error, qrCanvas) {
+                    if (error) console.error(error);
 
-function updateCombinedCanvas(name, email, phone, bgColor, textColor, qrCanvas) {
-   const combinedCanvas = document.getElementById('combinedCanvas');
-   const cardWidth = 300;
-   const cardHeight = 500;
-   combinedCanvas.width = cardWidth;
-   combinedCanvas.height = cardHeight;
-   const ctx = combinedCanvas.getContext('2d');
+                    // Update combined canvas
+                    updateCombinedCanvas(name, email, phone, bgColor, textColor, qrCanvas);
+                });
+            }
+        }
 
-   // Draw background with rounded rectangle
-   const cardX = 0;
-   const cardY = 0;
-   const cardRadius = 10;
+        function updateCombinedCanvas(name, email, phone, bgColor, textColor, qrCanvas) {
+            const combinedCanvas = document.getElementById('combinedCanvas');
+            const cardWidth = 300;
+            const cardHeight = 500;
+            combinedCanvas.width = cardWidth;
+            combinedCanvas.height = cardHeight;
+            const ctx = combinedCanvas.getContext('2d');
 
-   ctx.fillStyle = bgColor;
-   drawRoundedRect(ctx, cardX, cardY, cardWidth, cardHeight, cardRadius);
-   ctx.fill();
+            // Draw background with rounded rectangle
+            const cardX = 0;
+            const cardY = 0;
+            const cardRadius = 10;
 
-   ctx.strokeStyle = "#ccc";
-   ctx.lineWidth = 1;
-   drawRoundedRect(ctx, cardX, cardY, cardWidth, cardHeight, cardRadius);
-   ctx.stroke();
+            ctx.fillStyle = bgColor;
+            drawRoundedRect(ctx, cardX, cardY, cardWidth, cardHeight, cardRadius);
+            ctx.fill();
 
-   // Draw profile photo if available
-   const profilePhotoFile = document.getElementById('profilePhoto').files[0];
-   if (profilePhotoFile) {
-       const reader = new FileReader();
-       reader.onload = function (e) {
-           const profilePhoto = new Image();
-           profilePhoto.onload = function () {
-               const profilePhotoSize = 100;
-               ctx.drawImage(profilePhoto, (combinedCanvas.width - profilePhotoSize) / 2, 10, profilePhotoSize, profilePhotoSize);
-               drawTextAndQRCode(ctx, name, email, phone, textColor, qrCanvas, profilePhotoSize + 20);
-           };
-           profilePhoto.src = e.target.result;
-       };
-       reader.readAsDataURL(profilePhotoFile);
-   } else {
-       drawTextAndQRCode(ctx, name, email, phone, textColor, qrCanvas, 0);
-   }
-}
+            ctx.strokeStyle = "#ccc";
+            ctx.lineWidth = 1;
+            drawRoundedRect(ctx, cardX, cardY, cardWidth, cardHeight, cardRadius);
+            ctx.stroke();
 
-function drawTextAndQRCode(ctx, name, email, phone, textColor, qrCanvas, offsetY) {
-   // Draw text
-   ctx.fillStyle = textColor;
-   ctx.font = "bold 20px Arial";
-   ctx.textAlign = "center";
-   ctx.fillText(name, ctx.canvas.width / 2, offsetY + 50);
+            // Draw text
+            ctx.fillStyle = textColor;
+            ctx.font = "bold 20px Arial";
+            ctx.textAlign = "center";
+            ctx.fillText(name, combinedCanvas.width / 2, 50);
 
-   ctx.font = "16px Arial";
-   ctx.fillText(email, ctx.canvas.width / 2, offsetY + 100);
-   ctx.fillText(phone, ctx.canvas.width / 2, offsetY + 150);
+            ctx.font = "16px Arial";
+            ctx.fillText(email, combinedCanvas.width / 2, 100);
+            ctx.fillText(phone, combinedCanvas.width / 2, 150);
 
-   // Draw QR code
-   ctx.drawImage(qrCanvas, (ctx.canvas.width - qrCanvas.width) / 2, offsetY + 200);
+            // Draw QR code
+            ctx.drawImage(qrCanvas, (combinedCanvas.width - qrCanvas.width) / 2, 200);
 
-   // Create a data URL from the combined canvas
-   const dataUrl = ctx.canvas.toDataURL('image/jpg');
+            // Create a data URL from the combined canvas
+            const dataUrl = combinedCanvas.toDataURL('image/png');
 
-   // Create a download link for the combined canvas
-   const downloadLink = document.getElementById('downloadLink');
-   downloadLink.href = dataUrl;
-   downloadLink.download = 'business_card.jpg';
-   downloadLink.style.display = 'block';
-   downloadLink.innerText = 'Download Business Card';
-}
+            // Create a download link for the combined canvas
+            const downloadLink = document.getElementById('downloadLink');
+            downloadLink.href = dataUrl;
+            downloadLink.download = 'business_card.png';
+            downloadLink.style.display = 'block';
+            downloadLink.innerText = 'Download Business Card';
+        }
 
-document.getElementById('name').addEventListener('input', updateCard);
-document.getElementById('email').addEventListener('input', updateCard);
-document.getElementById('phone').addEventListener('input', updateCard);
-document.getElementById('bgColor').addEventListener('input', updateCard);
-document.getElementById('textColor').addEventListener('input', updateCard);
-document.getElementById('logo').addEventListener('change', updateCard);
-document.getElementById('logoSizeX').addEventListener('input', updateCard);
-document.getElementById('logoSizeY').addEventListener('input', updateCard);
+        document.getElementById('name').addEventListener('input', updateCard);
+        document.getElementById('email').addEventListener('input', updateCard);
+        document.getElementById('phone').addEventListener('input', updateCard);
+        document.getElementById('bgColor').addEventListener('input', updateCard);
+        document.getElementById('textColor').addEventListener('input', updateCard);
+        document.getElementById('logo').addEventListener('change', updateCard);
+        document.getElementById('logoSizeX').addEventListener('input', updateCard);
+        document.getElementById('logoSizeY').addEventListener('input', updateCard);
 
-// Initial update to ensure everything is set up correctly
-updateCard();
+        // Initial update to ensure everything is set up correctly
+        updateCard();
