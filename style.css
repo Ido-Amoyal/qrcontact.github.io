@@ -90,6 +90,9 @@ body {
 }
 
 @media (max-width: 480px) {
+    .container {
+        margin-bottom: 10rem;
+    }
     .card, .business-card {
         max-width: 100%;
     }
