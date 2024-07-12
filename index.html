@@ -15,39 +15,29 @@
                 <input type="text" id="name" placeholder="Name" required>
                 <input type="text" id="org" placeholder="Org" required>
                 <input type="text" id="role" placeholder="Role" required>
-                <input type="text" id="linkedIn_link" placeholder="linkedIn_link" required>
-
+                <input type="text" id="linkedIn_link" placeholder="LinkedIn Link" required>
                 <input type="email" id="email" placeholder="Email" required>
                 <input type="tel" id="phone" placeholder="Phone Number" required>
                 <label for="bgColor">Background Color:</label>
-                <input type="color" id="bgColor" value="#000000">
+                <input type="color" id="bgColor" value="#000000"> 
                 <label for="textColor">Text Color:</label>
                 <input type="color" id="textColor" value="#ffffff">
                 <label for="logo">Upload Logo (optional):</label>
                 <input type="file" id="logo" accept="image/*">
                 <label for="logoSizeX">Logo Size (X-axis):</label>
-                <input type="range" id="logoSizeX" min="10" max="50" value="20">
+                <input type="range" id="logoSizeX" min="10" max="29" value="20">
                 <label for="logoSizeY">Logo Size (Y-axis):</label>
-                <input type="range" id="logoSizeY" min="10" max="50" value="20">
+                <input type="range" id="logoSizeY" min="5" max="10.5" value="10.5">
             </form>
-            <a id="downloadLink" style="display:none;">Download Business Card</a>
-
+            <a id="downloadLink" class="button" style="display:none;">Download Business Card</a>
+            <a id="walletLink" class="button" style="display:none;">Download Wallet Pass</a>
         </div>
         
         <div class="business-card" id="businessCard">
-
             <h2 id="displayOrg" style="text-transform: uppercase;"></h2>
-            <br/>
-            <br/>
-            <br/>
-
             <canvas id="qrcode"></canvas>
-            <br/>
-            <br/>
-            <br/>
-
             <h2 id="displayName" style="text-transform: uppercase;"></h2>
-            <h2 id="displayRole" style="text-transform: uppercase; padding-bottom: rem;"></h2>
+            <h2 id="displayRole" style="text-transform: uppercase;"></h2>
         </div>
     </div>
     <canvas id="combinedCanvas"></canvas>

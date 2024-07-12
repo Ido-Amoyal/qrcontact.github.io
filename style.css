@@ -5,9 +5,13 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    /*background-color: #000000;
+    background: linear-gradient(#000000, #525252);
+    background: linear-gradient(to bottom right, blue, pink);*/
+    background: radial-gradient(ellipse at top, pink, transparent),
+    radial-gradient(ellipse at bottom, #0c879f, transparent);
+
     overflow: hidden;
-    
 }
 
 .container {
@@ -24,13 +28,15 @@ body {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    box-shadow: 0 0 35px rgba(0,0,0,0.1);
     text-align: center;
     width: 100%;
     max-width: 350px;
     box-sizing: border-box;
     align-self: center;
     margin: 10px;
+    border: 1px solid rgb(255, 255, 255);
+
 }
 
 .card input, .card button, .card input[type=color], .card input[type=file], .card input[type=range] {
@@ -52,7 +58,7 @@ body {
     background-color: #000000;
     position: relative;
     width: 100%;
-    max-width: 350px;
+    max-width: 412px;
     box-sizing: border-box;
     margin: 10px;
 }
@@ -71,7 +77,7 @@ body {
     display: block;
     margin-top: 20px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #000000;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -79,33 +85,26 @@ body {
 }
 
 #downloadLink:hover {
-    background-color: #0056b3;
+    background-color: #000000;
 }
 
 #combinedCanvas {
     display: none;
 }
 
-#generateButton{
+.button {
     display: block;
     margin-top: 20px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #000000;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
     box-sizing: border-box;
 }
 
-#generateButton:hover {
-    background-color: #0056b3;
-}
-
-#walletLink{
-    text-decoration: none;
-    font-size: 16px;
-    color: #ffffff;
-
+.button:hover {
+    background-color: #000000;
 }
 
 @media (max-width: 768px) {
@@ -116,8 +115,8 @@ body {
 }
 
 @media (max-width: 480px) {
-    .business-card{
-        margin-bottom: 10rem
+    .business-card {
+        margin-bottom: 10rem;
     }
     .card, .business-card {
         max-width: 100%;
@@ -132,4 +131,3 @@ body {
         padding: 8px;
     }
 }
-
