@@ -21,6 +21,7 @@ function updateCard() {
     const linkedIn_link = document.getElementById('linkedIn_link').value;
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
+    const event = document.getElementById('event').value;
     const bgColor = document.getElementById('bgColor').value;
     const textColor = document.getElementById('textColor').value;
     const logoSizePercentageX = document.getElementById('logoSizeX').value;
@@ -45,6 +46,7 @@ TITLE:${role}
 TEL;TYPE=CELL:${phone}
 EMAIL:${email}
 URL;TYPE=linkedin:https://${linkedIn_link}
+NOTE:Event: ${event}
 END:VCARD`;
 
     const logoFile = document.getElementById('logo').files[0];
@@ -151,5 +153,7 @@ document.getElementById('textColor').addEventListener('input', updateCard);
 document.getElementById('logo').addEventListener('change', updateCard);
 document.getElementById('logoSizeX').addEventListener('input', updateCard);
 document.getElementById('logoSizeY').addEventListener('input', updateCard);
+document.getElementById('event').addEventListener('input', updateCard);
+
 // Initial update to ensure everything is set up correctly
 updateCard();
